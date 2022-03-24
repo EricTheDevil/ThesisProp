@@ -31,13 +31,13 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartClient()
     {
+        Debug.Log("START");
         var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
 
         foreach(var prefab in spawnablePrefabs)
         {
             NetworkClient.RegisterPrefab(prefab);
         }
-    
     }
     public override void OnClientConnect(NetworkConnection conn)
     {
@@ -62,11 +62,22 @@ public class NetworkManagerLobby : NetworkManager
         }
         */
         Debug.Log("Server connected");
+        Debug.Log(this.networkAddress);
+        this.networkAddress = "86.50.69.212";
+        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                Debug.Log(ip.ToString());
+            }
+        }
         if (SceneManager.GetActiveScene().name != menuScene)
         {
             //conn.Disconnect();
             return;
         }
+        
     }
     public override void OnServerDisconnect(NetworkConnection conn)
     {
@@ -74,9 +85,7 @@ public class NetworkManagerLobby : NetworkManager
         {
             var player = conn.identity.GetComponent<NetworkRoomPlayerLobby>();
 
-            RoomPlayers.Remove(player);
-
-           
+            RoomPlayers.Remove(player);        
         }
 
         base.OnServerDisconnect(conn);
@@ -118,7 +127,7 @@ public class NetworkManagerLobby : NetworkManager
                 var gameplayerInstance = Instantiate(gamePlayerPrefab);
                 gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
 
-                NetworkServer.Destroy(conn.identity.gameObject);
+                //NetworkServer.Destroy(conn.identity.gameObject);
 
                 //NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
             }
