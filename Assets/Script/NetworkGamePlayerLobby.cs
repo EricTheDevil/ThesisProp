@@ -7,7 +7,7 @@ public class NetworkGamePlayerLobby : NetworkBehaviour
 {
     [SyncVar]
     private string displayName = "Loading...";
-
+    /*
     private NetworkManagerLobby room;
     private NetworkManagerLobby Room    
     {
@@ -29,7 +29,7 @@ public class NetworkGamePlayerLobby : NetworkBehaviour
     {
         Room.GamePlayers.Remove(this);
     }
-
+    */
     [Server]
     public void SetDisplayName(string displayName)
     {

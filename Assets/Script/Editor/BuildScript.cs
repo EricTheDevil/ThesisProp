@@ -17,7 +17,7 @@ public class BuildScript
     public static void BuildWindowsServer()
     {
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.scenes = new[] { "Assets/Scenes/e.unity" };
+        buildPlayerOptions.scenes = new[] { "Assets/Scenes/Main.unity" };
         buildPlayerOptions.locationPathName = "Builds/Windows/Server/Server.exe";
         buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
         buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.EnableHeadlessMode;
