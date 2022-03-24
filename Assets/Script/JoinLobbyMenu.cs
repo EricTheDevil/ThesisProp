@@ -28,13 +28,7 @@ public class JoinLobbyMenu : MonoBehaviour
     public void JoinLobby()
     {
       
-        string ipAddress = ipAddressInputField.text;
-        if (ipAddress.Length < 1)
-        {
-            ipAddress = "localhost";
-        }
-       // ipAddress = "localhost";
-        networkManager.networkAddress = ipAddress;
+
         networkManager.StartClient();
         joinButton.interactable = false;
     }

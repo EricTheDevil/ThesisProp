@@ -62,16 +62,8 @@ public class NetworkManagerLobby : NetworkManager
         }
         */
         Debug.Log("Server connected");
-        Debug.Log(this.networkAddress);
-        this.networkAddress = "86.50.69.212";
-        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-        foreach (var ip in host.AddressList)
-        {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            {
-                Debug.Log(ip.ToString());
-            }
-        }
+
+
         if (SceneManager.GetActiveScene().name != menuScene)
         {
             //conn.Disconnect();
@@ -103,12 +95,7 @@ public class NetworkManagerLobby : NetworkManager
 
     }
 
-    private bool IsReadyToStart()
-    {
-        if (numPlayers < minPlayers) { return false; };
 
-        return true;
-    }
     public override void OnStopServer()
     {
         RoomPlayers.Clear();
@@ -119,7 +106,8 @@ public class NetworkManagerLobby : NetworkManager
     }
     public override void ServerChangeScene(string newSceneName)
     {
-        if (SceneManager.GetActiveScene().name == menuScene && newSceneName.StartsWith("Scene_Map"))
+        Debug.Log("E");
+        if (SceneManager.GetActiveScene().name == menuScene )
         {
             for (int i = RoomPlayers.Count - 1; i >= 0; i--)
             {
