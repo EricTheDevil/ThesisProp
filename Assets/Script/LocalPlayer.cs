@@ -6,7 +6,7 @@ using UnityEngine.XR;
 
 public class LocalPlayer : NetworkBehaviour
 {
-    public GameObject root;
+    [SerializeField] public GameObject root;
     public GameObject ovrCamRig;
     public Transform leftHand;
     public Transform rightHand;
@@ -29,9 +29,17 @@ public class LocalPlayer : NetworkBehaviour
     }
     private void Start()
     {
-        enabled = false;
+        //enabled = false;
         root.SetActive(false);
         pos = transform.position;
+    }
+    private void Update()
+    {
+        if (hasAuthority)
+        {
+            enabled = true;
+            root.SetActive(true);
+        }
     }
     public override void OnStartAuthority()
     {
@@ -39,8 +47,7 @@ public class LocalPlayer : NetworkBehaviour
         isLocal = this.isLocalPlayer;
         Debug.Log(this.hasAuthority);
         Debug.Log(this.isLocalPlayer);
-        enabled = true;
-
+  
 
         Controls.XRIHMD.Rotation.performed += ctx => LookHead(ctx.ReadValue<Quaternion>());
         Controls.XRIHMD.Position.performed += ctx => MoveHead(ctx.ReadValue<Vector3>());

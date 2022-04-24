@@ -328,9 +328,6 @@ using UnityEngine.UI;
         winner.gameObject.GetComponent<LocalPlayer>().root.SetActive(true);
         //winner.gameObject.SetActive(false);
         //loser.gameObject.SetActive(false);
-
-
-
     }
 }
 
