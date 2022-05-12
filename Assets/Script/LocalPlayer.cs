@@ -120,4 +120,16 @@ public class LocalPlayer : NetworkBehaviour
         ovrCamRig.transform.Rotate(0f, lookAxis.x * deltaTime, 0f);
     }
 
+    [Command]
+    void CmdGetSpecificPlayer(GameObject target)
+    {
+        NetworkIdentity opponentIdentity = target.GetComponent<NetworkIdentity>();
+        TargetGetSpecificPlayer(opponentIdentity.connectionToClient);
+    }
+
+    [TargetRpc]
+    public void TargetGetSpecificPlayer(NetworkConnection target)
+    {
+        Debug.Log($"Magic Damage = ");
+    }
 }

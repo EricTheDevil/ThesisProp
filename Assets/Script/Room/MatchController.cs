@@ -25,6 +25,7 @@ using UnityEngine.UI;
 
         [Header("Diagnostics - Do Not Modify")]
         public CanvasController canvasController;
+         public List<NetworkIdentity>  players;
         public NetworkIdentity player1;
         public NetworkIdentity player2;
         public NetworkIdentity startingPlayer;
@@ -314,20 +315,33 @@ using UnityEngine.UI;
     [Command(requiresAuthority = false)]
     public void CmdGetPlayers()
     {
-        
-        Debug.Log(player1 +"Server");
-        NetworkIdentity play1 = player1;
-        NetworkIdentity play2 = player2;
-        RpcGetPlayer(play1, play2);
+        List<NetworkIdentity> playerList = players;
+        RpcGetPlayer(playerList);
     }
     [ClientRpc]
-    public void RpcGetPlayer(NetworkIdentity winner, NetworkIdentity loser)
+    public void RpcGetPlayer(List<NetworkIdentity> playersList)
     {
-        Debug.Log(winner);
-        loser.gameObject.GetComponent<LocalPlayer>().root.SetActive(false);
-        winner.gameObject.GetComponent<LocalPlayer>().root.SetActive(true);
+        for(int i=0; i < playersList.Count; i++)
+        {
+            Debug.Log(playersList[i]);
+        }
+        //loser.gameObject.GetComponent<LocalPlayer>().root.SetActive(false);
+        //winner.gameObject.GetComponent<LocalPlayer>().root.SetActive(true);
         //winner.gameObject.SetActive(false);
         //loser.gameObject.SetActive(false);
     }
+    [ClientRpc]
+    public void RpcSpawnItem()
+    {
+
+    }
+    [Command(requiresAuthority = false)]
+    public void CmdSpawnItem()
+    {
+        List<NetworkIdentity> playerList = players;
+        RpcSpawnItem(playerList);
+    }
+
+
 }
 

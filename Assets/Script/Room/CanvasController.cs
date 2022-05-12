@@ -501,14 +501,17 @@ public class CanvasController : MonoBehaviour
                     if (matchController.player1 == null)
                     {
                         matchController.player1 = playerConn.identity;
+                        matchController.players.Add(playerConn.identity);
                     }
                     else
                     {
                         matchController.player2 = playerConn.identity;
-                    }
+                        matchController.players.Add(playerConn.identity);
 
-                    /* Reset ready state for after the match. */
-                    PlayerInfo playerInfo = playerInfos[playerConn];
+                }
+
+                /* Reset ready state for after the match. */
+                PlayerInfo playerInfo = playerInfos[playerConn];
                     playerInfo.ready = false;
                     playerInfos[playerConn] = playerInfo;
                 }
