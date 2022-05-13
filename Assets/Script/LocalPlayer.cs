@@ -15,7 +15,7 @@ public class LocalPlayer : NetworkBehaviour
     public Camera rightEye;
 
     Vector3 pos;
-
+    public bool isLeader = false;
     public bool hasAuth = false;
     public bool isLocal = false;
     private XRIActions controls;
@@ -56,6 +56,7 @@ public class LocalPlayer : NetworkBehaviour
         Controls.XRILeftHand.Rotation.performed += ctx => Hands(ctx.ReadValue<Quaternion>());
 
         Controls.XRIRightHand.Position.performed += ctx => rHands(ctx.ReadValue<Vector3>());
+
     }
     [ClientCallback]
     private void OnEnable() => Controls.Enable();
@@ -120,7 +121,11 @@ public class LocalPlayer : NetworkBehaviour
         ovrCamRig.transform.Rotate(0f, lookAxis.x * deltaTime, 0f);
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
+    void CmdTest()
+    {
+
+    }
     void CmdGetSpecificPlayer(GameObject target)
     {
         NetworkIdentity opponentIdentity = target.GetComponent<NetworkIdentity>();

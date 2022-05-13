@@ -35,7 +35,7 @@ using UnityEngine.UI;
                 }
             }
 
-            startButton.interactable = everyoneReady && owner && (playerInfos.Length > 1);
+            startButton.interactable = everyoneReady && owner;
         }
 
         public void SetOwner(bool owner)

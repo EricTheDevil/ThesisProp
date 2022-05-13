@@ -895,6 +895,7 @@ MonoBehaviour:
   rightHand: {fileID: 1356190495632732004}
   leftEye: {fileID: 0}
   rightEye: {fileID: 0}
+  isLeader: 0
   hasAuth: 0
   isLocal: 0
 --- !u!114 &1759355002346452468

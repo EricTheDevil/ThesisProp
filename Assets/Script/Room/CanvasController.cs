@@ -66,6 +66,8 @@ public class CanvasController : MonoBehaviour
         public RoomGUI roomGUI;
         public ToggleGroup toggleGroup;
 
+    public PlayerInfo player;
+
         #region UI Functions
 
         // Called from several places to ensure a clean reset
@@ -308,9 +310,11 @@ public class CanvasController : MonoBehaviour
         internal void OnClientConnect(NetworkConnection conn)
         {
             playerInfos.Add(conn, new PlayerInfo { playerIndex = this.playerIndex, ready = false });
-        }
+  
 
-        internal void OnStartClient()
+    }
+
+    internal void OnStartClient()
         {
             if (!NetworkClient.active) return;
 
@@ -319,6 +323,8 @@ public class CanvasController : MonoBehaviour
             createButton.gameObject.SetActive(true);
             joinButton.gameObject.SetActive(true);
             NetworkClient.RegisterHandler<ClientMatchMessage>(OnClientMatchMessage);
+        
+
         }
 
         internal void OnClientDisconnect()
@@ -475,7 +481,7 @@ public class CanvasController : MonoBehaviour
                 SendMatchList();
             }
         }
-
+ 
         void OnServerStartMatch(NetworkConnection conn)
         {
             if (!NetworkServer.active || !playerMatches.ContainsKey(conn)) return;
@@ -492,7 +498,7 @@ public class CanvasController : MonoBehaviour
                 foreach (NetworkConnection playerConn in matchConnections[matchId])
                 {
                     playerConn.Send(new ClientMatchMessage { clientMatchOperation = ClientMatchOperation.Started });
-
+                    
                     GameObject player = Instantiate(NetworkManager.singleton.playerPrefab);
                     player.GetComponent<NetworkMatch>().matchId = matchId;
 
@@ -502,13 +508,10 @@ public class CanvasController : MonoBehaviour
                     {
                         matchController.player1 = playerConn.identity;
                         matchController.players.Add(playerConn.identity);
-                    }
-                    else
-                    {
-                        matchController.player2 = playerConn.identity;
-                        matchController.players.Add(playerConn.identity);
+                    matchController.getCurrentPlayer(playerConn.identity);
 
                 }
+
 
                 /* Reset ready state for after the match. */
                 PlayerInfo playerInfo = playerInfos[playerConn];
@@ -536,7 +539,7 @@ public class CanvasController : MonoBehaviour
             matchInfo.players++;
             openMatches[matchId] = matchInfo;
             matchConnections[matchId].Add(conn);
-
+            
             PlayerInfo playerInfo = playerInfos[conn];
             playerInfo.ready = false;
             playerInfo.matchId = matchId;
@@ -548,7 +551,7 @@ public class CanvasController : MonoBehaviour
             conn.Send(new ClientMatchMessage { clientMatchOperation = ClientMatchOperation.Joined, matchId = matchId, playerInfos = infos });
 
             foreach (NetworkConnection playerConn in matchConnections[matchId])
-            {
+            {   
                 playerConn.Send(new ClientMatchMessage { clientMatchOperation = ClientMatchOperation.UpdateRoom, playerInfos = infos });
             }
         }
