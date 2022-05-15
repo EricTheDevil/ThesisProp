@@ -1166,7 +1166,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 2923784255186993310, guid: e101d385946c91b4c81f318efc723a88, type: 3}
   - {fileID: 220129690857068438, guid: 5872c74576db2014ea312582eba08907, type: 3}
-  - {fileID: 0}
+  - {fileID: 1916082411674582, guid: 6f43bf5488a7443d19ab2a83c6b91f35, type: 3}
   - {fileID: 0}
   canvas: {fileID: 2050110693}
   canvasController: {fileID: 2050110698}
@@ -2776,6 +2776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c403ead9d8cb5d14cb7f939fab6342e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayer: {fileID: 0}
+  isLeader: 0
 --- !u!4 &1996209703
 Transform:
   m_ObjectHideFlags: 0
@@ -2914,6 +2916,9 @@ MonoBehaviour:
   roomView: {fileID: 1258848446}
   roomGUI: {fileID: 1258848448}
   toggleGroup: {fileID: 1386671672}
+  player:
+    playerIndex: 0
+    ready: 0
 --- !u!1 &2105646338
 GameObject:
   m_ObjectHideFlags: 0

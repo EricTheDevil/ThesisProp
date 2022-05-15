@@ -361,7 +361,6 @@ public class MatchController : NetworkBehaviour
     [ClientRpc]
     public void RpcSpawnItem(NetworkIdentity play)
     {
-
        
         //play(false);
     }
