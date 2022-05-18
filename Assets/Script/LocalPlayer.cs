@@ -104,14 +104,6 @@ public class LocalPlayer : NetworkBehaviour
         float deltaTime = Time.deltaTime;
 
         //playerTransform.rotation = lookAxis;
-
-
-        //  UnityEngine.XR.InputDevice handR = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-        // InputDevice hed = InputDevices.GetDeviceAtXRNode(XRNode.Head);
-        //hed.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceRotation, out Quaternion rotR);
-        //playerTransform.rotation = rotR;
-        //hed = InputDevices.GetDeviceAtXRNode(XRNode.Head);
-        //playerTransform.rotation = (0f,lookAxis.normalized.x * cameraVelocity.x * deltaTime, 0f,0f);
     }
     private void MoveHead(Vector3 lookAxis)
     {

@@ -38,7 +38,7 @@ using UnityEngine.UI;
         {
             matchId = infos.matchId;
             matchName.text = $"Match {infos.matchId.ToString().Substring(0, 8)}";
-            playerCount.text = $"{infos.players} / {infos.maxPlayers}";
+            playerCount.text = $"{infos.players}";
         }
     }
 
